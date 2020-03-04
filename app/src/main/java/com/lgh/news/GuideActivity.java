@@ -57,12 +57,14 @@ public class GuideActivity extends BaseActivity {
             imageView.setBackgroundResource(mIamgedIds[i]);
             imageViews.add(imageView);
             ImageView point = new ImageView(this);
+            point.setImageResource(R.drawable.shape_guide_point_normal);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             if (i > 0) {
                 params.leftMargin = 10;
             }
             point.setLayoutParams(params);
+            linearLayout.addView(point);
         }
         viewPager.setAdapter(new GuideAdapter());
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
