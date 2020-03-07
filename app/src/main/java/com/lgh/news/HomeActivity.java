@@ -6,6 +6,7 @@ import android.view.Window;
 import com.lgh.news.fragment.ContentFragment;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -38,4 +39,10 @@ public class HomeActivity extends FragmentActivity {
         ContentFragment cf = (ContentFragment) fm.findFragmentByTag(TAG_CONTENT);
     }
 
+    public Fragment getContentFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+//        ContentFragment contentFragment = (ContentFragment) fm.findFragmentById(R.id.fl_content);
+        ContentFragment cf = (ContentFragment) fm.findFragmentByTag(TAG_CONTENT);
+        return cf;
+    }
 }

@@ -16,7 +16,7 @@ import com.lgh.news.R;
  */
 public class BasePager {
 
-    public Activity activity;
+    public Activity mActivity;
     public TextView titleTv;
     public ImageView leftIv;
     public ImageView rightIv;
@@ -25,12 +25,12 @@ public class BasePager {
 
 
     public BasePager(Activity activity) {
-        this.activity = activity;
+        this.mActivity = activity;
         rootView = initView();
     }
 
     public View initView() {
-        View view = View.inflate(activity, R.layout.base_pager, null);
+        View view = View.inflate(mActivity, R.layout.base_pager, null);
         titleTv = view.findViewById(R.id.pager_title);
         leftIv = view.findViewById(R.id.paget_left_iv);
         rightIv = view.findViewById(R.id.pager_right_iv);

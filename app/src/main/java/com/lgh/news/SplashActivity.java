@@ -48,7 +48,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(SplashActivity.this,GuideActivity.class));
+                startActivity(new Intent(SplashActivity.this,HomeActivity.class));
                 finish();
             }
 
