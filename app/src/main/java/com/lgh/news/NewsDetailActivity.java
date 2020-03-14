@@ -2,26 +2,31 @@ package com.lgh.news;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class NewsDetailActivity extends BaseActivity {
 
     private WebView webView;
     private ProgressBar progressBar;
+    private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +34,7 @@ public class NewsDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_news_detail);
         webView = findViewById(R.id.webview);
         progressBar = findViewById(R.id.webview_loading);
+        button = findViewById(R.id.btn_text_size);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//支持JavaScript
         webSettings.setBuiltInZoomControls(true);//放大缩小，不支持已适配的页面
@@ -80,6 +86,7 @@ public class NewsDetailActivity extends BaseActivity {
         });
 
         webView.loadUrl("https://www.baidu.com");
+
     }
 
     @Override
