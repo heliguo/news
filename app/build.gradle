@@ -24,7 +24,7 @@ android {
 
 MobSDK {
     appKey "2e5eeaa2a1118"
-    appSecret "81834f994eb9b04a387f08bc933ecf69"
+    appSecret ""
     ShareSDK {
         loopShare true
         devInfo {
