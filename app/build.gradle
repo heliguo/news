@@ -20,7 +20,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "5b3db5e51c422c48a9a6d20b", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY : "111", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
 
@@ -43,8 +43,8 @@ android {
 }
 
 MobSDK {
-    appKey "2e5eeaa2a1118"
-    appSecret "81834f994eb9b04a387f08bc933ecf69"
+    appKey "222"
+    appSecret "333"
     ShareSDK {
         loopShare true
         devInfo {
