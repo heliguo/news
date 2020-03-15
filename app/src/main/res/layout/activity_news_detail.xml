@@ -5,6 +5,13 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_yuyin_shibie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="语音识别"
+        android:onClick="yuyinshibie" />
+
+    <Button
         android:id="@+id/btn_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -2,13 +2,12 @@ package com.lgh.news;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -17,9 +16,15 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.ui.RecognizerDialog;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import cn.jpush.android.api.JPushInterface;
+import androidx.core.app.ActivityCompat;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class NewsDetailActivity extends BaseActivity {
@@ -27,14 +32,17 @@ public class NewsDetailActivity extends BaseActivity {
     private WebView webView;
     private ProgressBar progressBar;
     private Button button;
+    private Button yuyinBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        verifyAudioPermissions();
         setContentView(R.layout.activity_news_detail);
         webView = findViewById(R.id.webview);
         progressBar = findViewById(R.id.webview_loading);
         button = findViewById(R.id.btn_text_size);
+        yuyinBtn = findViewById(R.id.btn_yuyin_shibie);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//支持JavaScript
         webSettings.setBuiltInZoomControls(true);//放大缩小，不支持已适配的页面
@@ -86,6 +94,26 @@ public class NewsDetailActivity extends BaseActivity {
         });
 
         webView.loadUrl("https://www.baidu.com");
+
+    }
+
+    public void startListerer(View view) {
+        RecognizerDialog mDiaolog = new RecognizerDialog(this, null);
+        mDiaolog.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
+        mDiaolog.setParameter(SpeechConstant.ACCENT, "mandarin");//普通话
+        mDiaolog.setListener(new RecognizerDialogListener() {
+            @Override
+            public void onResult(RecognizerResult recognizerResult, boolean b) {
+                String resultString = recognizerResult.getResultString();
+                Log.e("yuyingshibie", "onResult: " + resultString);
+            }
+
+            @Override
+            public void onError(SpeechError speechError) {
+
+            }
+        });
+        mDiaolog.show();
 
     }
 
@@ -154,7 +182,28 @@ public class NewsDetailActivity extends BaseActivity {
         oks.setUrl("http://sharesdk.cn");
         // comment是我对这条分享的评论，仅在人人网使用
         oks.setComment("我是测试评论文本");
-       // 启动分享GUI
+        // 启动分享GUI
         oks.show(this);
     }
+
+    public void yuyinshibie(View view) {
+        startListerer(view);
+    }
+
+    //申请录音权限
+    private static final int GET_RECODE_AUDIO = 1;
+    private static String[] PERMISSION_AUDIO = {android.Manifest.permission.RECORD_AUDIO};
+
+    /**
+     * 申请录音权限
+     */
+    public void verifyAudioPermissions() {
+        int permission = ActivityCompat.checkSelfPermission(NewsDetailActivity.this,
+                android.Manifest.permission.RECORD_AUDIO);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, PERMISSION_AUDIO,
+                    GET_RECODE_AUDIO);
+        }
+    }
+
 }
